@@ -2,7 +2,11 @@ import { type FC } from "react";
 import { type ProductInfoProps } from "../types/types";
 import styles from "./ProductInfo.module.css";
 
-export const ProductInfo: FC<ProductInfoProps> = ({ title, category }) => {
+export const ProductInfo: FC<ProductInfoProps> = ({
+  title,
+  category,
+  price,
+}) => {
   return (
     <>
       <div>
@@ -10,7 +14,10 @@ export const ProductInfo: FC<ProductInfoProps> = ({ title, category }) => {
           <span>
             <strong>{title}</strong>
           </span>
-          <span>{category}</span>
+          <span>{` ${category}`}</span>
+        </div>
+        <div>
+          <span>{`Rs. ${price}`}</span>
         </div>
       </div>
     </>

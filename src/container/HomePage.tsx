@@ -2,6 +2,7 @@ import { useEffect, useState, type FC, type ReactElement } from "react";
 import { API_URL } from "../utils/constant";
 import { type ProductInfoType } from "../types/types";
 import { ProductInfo } from "../components/ProductInfo";
+import styles from './Homepage.module.css'
 
 export const HomePage: FC = (): ReactElement => {
   const [data, setData] = useState<ProductInfoType[]>([]);
@@ -30,18 +31,20 @@ export const HomePage: FC = (): ReactElement => {
 
   return (
     <>
-      <span>Home Page</span>
-      {data?.map((item: ProductInfoType) => {
-        return (
-          <ProductInfo
-            key={`${item.id}${item.title}`}
-            id={item.id}
-            title={item.title}
-            price={item.price}
-            category={item.category}
-          />
-        );
-      })}
+      <h2>Home Page</h2>
+      <div className={styles.productContainer}>
+        {data?.map((item: ProductInfoType) => {
+          return (
+            <ProductInfo
+              key={`${item.id}${item.title}`}
+              id={item.id}
+              title={item.title}
+              price={item.price}
+              category={item.category}
+            />
+          );
+        })}
+      </div>
     </>
   );
 };
