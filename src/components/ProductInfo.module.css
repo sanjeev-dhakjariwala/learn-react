@@ -1,0 +1,8 @@
+.productInfoDiv{
+    border: 1px solid black;
+    border-radius: 1px;
+}
+.productImage {
+    height: 100px;
+    width: 100px;
+}

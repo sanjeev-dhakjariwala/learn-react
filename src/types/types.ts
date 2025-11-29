@@ -3,6 +3,7 @@ export interface ProductInfoProps {
   title: string;
   price: number;
   category: string;
+  image: string
 }
 
 interface Rating {

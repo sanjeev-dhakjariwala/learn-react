@@ -6,14 +6,20 @@ export const ProductInfo: FC<ProductInfoProps> = ({
   title,
   category,
   price,
+  image,
 }) => {
+  console.log(image);
   return (
     <>
-      <div>
+      <div className={styles.productInfoDiv}>
         <div className="titleRow">
-          <span>
-            <strong>{title}</strong>
-          </span>
+          <img className={styles.productImage} src={image} />
+          <div>
+            <span>
+              <strong>{title}</strong>
+            </span>
+          </div>
+
           <span>{` ${category}`}</span>
         </div>
         <div>
