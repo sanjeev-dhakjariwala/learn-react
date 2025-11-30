@@ -1,10 +1,10 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Header } from "./container/Header";
-import { HomePage } from "./container/HomePage";
-import { ElectronicsPage } from "./container/ElectronicsPage";
-import { GroceriesPage } from "./container/GroceriesPage";
-import { AboutPage } from "./container/AboutPage";
+import { Header } from "./container/header/Header";
+import { HomePage } from "./container/home/HomePage";
+import { ElectronicsPage } from "./container/electronics/ElectronicsPage";
+import { GroceriesPage } from "./container/groceries/GroceriesPage";
+import { AboutPage } from "./container/about/AboutPage";
 
 function App() {
   return (

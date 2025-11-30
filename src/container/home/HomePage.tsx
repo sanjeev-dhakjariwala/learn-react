@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback, type FC, type ReactElement } from "react";
-import { API_URL } from "../utils/constant";
-import { type ProductInfoType } from "../types/types";
-import { ProductInfo } from "../components/ProductInfo";
-import { SearchBar } from "../components/SearchBar";
+import { API_URL } from "../../utils/constant";
+import { type ProductInfoType } from "../../types/types";
+import { ProductInfo } from "../../components/ProductInfo";
+import { SearchBar } from "../../components/SearchBar";
 import styles from './Homepage.module.css'
 
 export const HomePage: FC = (): ReactElement => {
