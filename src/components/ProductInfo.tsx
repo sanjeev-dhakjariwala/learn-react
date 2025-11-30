@@ -1,8 +1,10 @@
 import { type FC } from "react";
 import { type ProductInfoProps } from "../types/types";
 import styles from "./ProductInfo.module.css";
+import { Link } from "react-router-dom";
 
 export const ProductInfo: FC<ProductInfoProps> = ({
+  id,
   title,
   category,
   price,
@@ -11,21 +13,23 @@ export const ProductInfo: FC<ProductInfoProps> = ({
   console.log(image);
   return (
     <>
-      <div className={styles.productInfoDiv}>
-        <div className="titleRow">
-          <img className={styles.productImage} src={image} />
-          <div>
-            <span>
-              <strong>{title}</strong>
-            </span>
-          </div>
+      <Link to={`/home/${id}`}>
+        <div className={styles.productInfoDiv}>
+          <div className="titleRow">
+            <img className={styles.productImage} src={image} />
+            <div>
+              <span>
+                <strong>{title}</strong>
+              </span>
+            </div>
 
-          <span>{` ${category}`}</span>
+            <span>{` ${category}`}</span>
+          </div>
+          <div>
+            <span>{`Rs. ${price}`}</span>
+          </div>
         </div>
-        <div>
-          <span>{`Rs. ${price}`}</span>
-        </div>
-      </div>
+      </Link>
     </>
   );
 };

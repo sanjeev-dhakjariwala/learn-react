@@ -1,16 +1,76 @@
-import { type FC } from "react";
+import { useEffect, useState, type FC } from "react";
+import { useParams } from "react-router-dom";
 import { type ProductInfoType } from "../../types/types";
+import { API_URL } from "../../utils/constant";
 import styles from "./ProductDetails.module.css";
 
-export const ProductDetails: FC<ProductInfoType> = ({
-  id,
-  title,
-  price,
-  category,
-  description,
-  image,
-  rating,
-}) => {
+export const ProductDetails: FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const [product, setProduct] = useState<ProductInfoType | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!id) {
+      setError("Product ID is missing");
+      setLoading(false);
+      return;
+    }
+
+    const abortController = new AbortController();
+
+    fetch(`${API_URL}products/${id}`, { signal: abortController.signal })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch product");
+        }
+        return res.json();
+      })
+      .then((data: ProductInfoType) => {
+        setProduct(data);
+        setError(null);
+      })
+      .catch((err: unknown) => {
+        if (err instanceof Error && err.name !== "AbortError") {
+          setError(err.message);
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+
+    return () => {
+      abortController.abort();
+    };
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className={styles.productDetailsContainer}>
+        <div className={styles.loading}>Loading product details...</div>
+      </div>
+    );
+  }
+
+  if (error || !product) {
+    return (
+      <div className={styles.productDetailsContainer}>
+        <div className={styles.error}>
+          {error || "Product not found"}
+        </div>
+      </div>
+    );
+  }
+
+  const {
+    id: productId,
+    title,
+    price,
+    category,
+    description,
+    image,
+    rating,
+  } = product;
   // Function to render star rating
   const renderStars = (rate: number) => {
     const fullStars = Math.floor(rate);
@@ -59,7 +119,7 @@ export const ProductDetails: FC<ProductInfoType> = ({
 
         {/* Product Information Section */}
         <div className={styles.infoSection}>
-          <div className={styles.productId}>Product ID: #{id}</div>
+          <div className={styles.productId}>Product ID: #{productId}</div>
           
           <h1 className={styles.productTitle}>{title}</h1>
           
