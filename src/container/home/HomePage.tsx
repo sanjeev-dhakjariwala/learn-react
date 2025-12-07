@@ -46,11 +46,6 @@ export const HomePage: FC = (): ReactElement => {
     }
   }, [data]); // Depends on 'data' - function updates when data changes
 
-  // useCallback: Memoized refresh handler
-  const handleRefresh = useCallback(() => {
-    console.log("Refreshing products...");
-    fetchProducts();
-  }, [fetchProducts]); // Depends on fetchProducts (which is memoized, so stable)
 
   useEffect(() => {
     const abortController = fetchProducts();
@@ -72,9 +67,6 @@ export const HomePage: FC = (): ReactElement => {
       <h2>Home Page</h2>
       <div className={styles.controls}>
         <SearchBar onSearch={handleSearch} />
-        <button onClick={handleRefresh} className={styles.refreshButton}>
-          🔄 Refresh
-        </button>
       </div>
       <div className={styles.productContainer}>
         {filteredData.length > 0 ? (
